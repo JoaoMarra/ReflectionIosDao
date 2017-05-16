@@ -21,8 +21,6 @@
             return @"like";
         case NOT_LIKE:
             return @"not like";
-        case CONTAINS:
-            return @"contains";
         case MORE_THAN:
             return @">";
         case MORE_EQUAL:

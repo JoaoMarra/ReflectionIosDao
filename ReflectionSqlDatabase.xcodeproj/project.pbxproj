@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F87CEC0E1ECB7E5200247CA4 /* WhereNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F87CEC0D1ECB7E5200247CA4 /* WhereNode.m */; };
 		F8B172501ECB31290072CE70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B1724F1ECB31290072CE70 /* main.m */; };
 		F8B172531ECB31290072CE70 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B172521ECB31290072CE70 /* AppDelegate.m */; };
 		F8B172561ECB31290072CE70 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B172551ECB31290072CE70 /* ViewController.m */; };
@@ -25,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F87CEC0C1ECB7E5200247CA4 /* WhereNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhereNode.h; sourceTree = "<group>"; };
+		F87CEC0D1ECB7E5200247CA4 /* WhereNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhereNode.m; sourceTree = "<group>"; };
 		F8B1724B1ECB31290072CE70 /* ReflectionSqlDatabase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReflectionSqlDatabase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8B1724F1ECB31290072CE70 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F8B172511ECB31290072CE70 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -170,6 +173,8 @@
 			children = (
 				F8B1729D1ECB73490072CE70 /* DBManager.h */,
 				F8B1729E1ECB73490072CE70 /* DBManager.m */,
+				F87CEC0C1ECB7E5200247CA4 /* WhereNode.h */,
+				F87CEC0D1ECB7E5200247CA4 /* WhereNode.m */,
 			);
 			name = utils;
 			path = Classes/utils;
@@ -253,6 +258,7 @@
 				F8B1729F1ECB73490072CE70 /* DateHelper.m in Sources */,
 				F8B172531ECB31290072CE70 /* AppDelegate.m in Sources */,
 				F8B172A31ECB73490072CE70 /* Select.m in Sources */,
+				F87CEC0E1ECB7E5200247CA4 /* WhereNode.m in Sources */,
 				F8B172A51ECB73490072CE70 /* DBManager.m in Sources */,
 				F8B172A41ECB73490072CE70 /* SelectQueryTransaction.m in Sources */,
 				F8B172501ECB31290072CE70 /* main.m in Sources */,

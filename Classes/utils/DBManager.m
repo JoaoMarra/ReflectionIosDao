@@ -100,6 +100,7 @@
 }
 
 +(BOOL)runQuery:(const char*)query executable:(BOOL)executable {
+    CFAbsoluteTime timeInSeconds = CFAbsoluteTimeGetCurrent();
     NSLog(@"DB RUN QUERY: %s", query);
     
     sqlite3 *sqlite3Database;
@@ -126,6 +127,7 @@
         }
         sqlite3_close(sqlite3Database);
     }
+    NSLog(@"DB QUERY END: %f", CFAbsoluteTimeGetCurrent()-timeInSeconds);
     
     return result;
 }

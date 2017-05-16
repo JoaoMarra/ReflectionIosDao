@@ -10,4 +10,8 @@
 
 @implementation TestModel
 
+-(NSString *)primaryKeyName {
+    return @"string";
+}
+
 @end

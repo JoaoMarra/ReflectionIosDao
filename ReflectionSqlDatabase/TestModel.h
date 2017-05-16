@@ -18,4 +18,5 @@
 @property(nonatomic, strong) NSDate *date;
 @property(nonatomic) long longVal;
 
+
 @end

@@ -15,6 +15,7 @@
 @interface DaoModel()
 
 @property(nonatomic, strong) NSString *insertBase;
+@property(nonatomic, strong) id default_primary_key;
 
 @end
 
@@ -97,6 +98,14 @@
 
 -(void)deleteModel {
     
+}
+
+-(NSString *)primaryKeyName {
+    return DEFAULT_PRIMARY_KEY;
+}
+
+-(id)primaryKeyValue {
+    return [self valueForKey:[self primaryKeyName]];
 }
 
 #pragma mark - Creating components

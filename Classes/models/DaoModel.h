@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define DEFAULT_PRIMARY_KEY @"default_primary_key"
+
 @interface DaoModel : NSObject
 
 -(instancetype)initWithDBDictionary:(NSDictionary *)dictionary;
@@ -19,5 +21,15 @@
 -(void)insertModel;
 -(void)updateModel;
 -(void)deleteModel;
+
+-(NSString *)primaryKeyName;
+-(id)primaryKeyValue;
+
+@end
+
+@protocol DaoModelProtocol <NSObject>
+
+-(NSString *)primaryKeyName;
+-(id)primaryKeyValue;
 
 @end

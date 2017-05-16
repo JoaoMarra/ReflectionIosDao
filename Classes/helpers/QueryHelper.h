@@ -15,7 +15,6 @@ typedef enum {
     NOTEQUAL,
     LIKE,
     NOT_LIKE,
-    CONTAINS,
     MORE_THAN,
     MORE_EQUAL,
     LESS_THAN,

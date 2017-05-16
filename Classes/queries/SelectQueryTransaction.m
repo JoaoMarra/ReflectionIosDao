@@ -10,11 +10,13 @@
 #import "DaoModel.h"
 #import "DBManager.h"
 #import "DaoModel.h"
+#import "WhereNode.h"
 
 @interface SelectQueryTransaction()
 
 @property(nonatomic) Class modelClass;
 
+@property(nonatomic, strong) NSMutableArray<WhereNode *>* whereNodes;
 @property(nonatomic, strong) NSMutableString *orderBy;
 @property(nonatomic) int limit;
 
@@ -32,6 +34,7 @@
 
 -(SelectQueryTransaction *) where:(NSString *)columnName value:(id)value comparation:(WHERE_COMPARATION)comparation {
     
+    [self.whereNodes addObject:[[WhereNode alloc] initWithColumnName:columnName value:value comparation:comparation]];
     
     return self;
 }
@@ -62,10 +65,22 @@
     [query appendString:@"SELECT * FROM "];
     [query appendString:[DaoModel tableName:self.modelClass]];
     
-    if(self.orderBy)
-        [query appendString:self.orderBy];
+    if(self.whereNodes.count > 0) {
+        [query appendString:@"\nwhere"];
+        WhereNode *node;
+        for(int i = 0; i < self.whereNodes.count; i++) {
+            node = self.whereNodes[i];
+            [query appendString:node.stringValue];
+            if(i < self.whereNodes.count-1)
+                [query appendString:@" AND\n"];
+        }
+    }
+    
+    if(self.orderBy) {
+        [query appendString:[NSString stringWithFormat:@"\n ORDER BY %@",self.orderBy]];
+    }
     if(self.limit > 0) {
-        [query appendString:[NSString stringWithFormat:@" limit %d",self.limit]];
+        [query appendString:[NSString stringWithFormat:@"\nlimit %d",self.limit]];
     }
     
     NSArray *data = [DBManager runQueryForArray:query.UTF8String];
@@ -81,6 +96,15 @@
     }
     
     return nil;
+}
+
+#pragma mark - Creating components
+
+-(NSMutableArray *)whereNodes {
+    if(!_whereNodes) {
+        _whereNodes = [NSMutableArray new];
+    }
+    return _whereNodes;
 }
 
 @end
