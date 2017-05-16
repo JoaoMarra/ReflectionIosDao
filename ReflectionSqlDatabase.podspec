@@ -37,6 +37,6 @@ SQLite library for Ios using reflection. The central ideia is to simplify the cr
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  s.frameworks = 'UIKit', 'sqlite3'
+  s.frameworks = 'UIKit', 'libsqlite3'
   # s.dependency 'AFNetworking', '~> 2.3'
 end
