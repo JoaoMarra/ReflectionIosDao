@@ -28,7 +28,7 @@ SQLite library for Ios using reflection. The central ideia is to simplify the cr
   s.source           = { :git => 'https://github.com/JoaoMarra/ReflectionIosDao.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  # s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.3'
 
   s.source_files = 'Classes/**/*.{h,m}'
   
