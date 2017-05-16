@@ -13,15 +13,15 @@
 		F8B172591ECB31290072CE70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8B172571ECB31290072CE70 /* Main.storyboard */; };
 		F8B1725B1ECB31290072CE70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8B1725A1ECB31290072CE70 /* Assets.xcassets */; };
 		F8B1725E1ECB31290072CE70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8B1725C1ECB31290072CE70 /* LaunchScreen.storyboard */; };
-		F8B172681ECB316E0072CE70 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B172671ECB316E0072CE70 /* DBManager.m */; };
 		F8B1726F1ECB32310072CE70 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B1726E1ECB32310072CE70 /* libsqlite3.tbd */; };
-		F8B172721ECB33830072CE70 /* DaoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B172711ECB33830072CE70 /* DaoModel.m */; };
-		F8B172751ECB3BD50072CE70 /* PropertyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B172741ECB3BD50072CE70 /* PropertyHelper.m */; };
 		F8B172781ECB434F0072CE70 /* TestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B172771ECB434F0072CE70 /* TestModel.m */; };
-		F8B1727B1ECB52D60072CE70 /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B1727A1ECB52D60072CE70 /* DateHelper.m */; };
-		F8B1727E1ECB58090072CE70 /* Select.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B1727D1ECB58090072CE70 /* Select.m */; };
-		F8B172811ECB582C0072CE70 /* SelectQueryTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B172801ECB582C0072CE70 /* SelectQueryTransaction.m */; };
-		F8B172841ECB5B720072CE70 /* QueryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B172831ECB5B720072CE70 /* QueryHelper.m */; };
+		F8B1729F1ECB73490072CE70 /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B1728F1ECB73490072CE70 /* DateHelper.m */; };
+		F8B172A01ECB73490072CE70 /* PropertyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B172911ECB73490072CE70 /* PropertyHelper.m */; };
+		F8B172A11ECB73490072CE70 /* QueryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B172931ECB73490072CE70 /* QueryHelper.m */; };
+		F8B172A21ECB73490072CE70 /* DaoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B172961ECB73490072CE70 /* DaoModel.m */; };
+		F8B172A31ECB73490072CE70 /* Select.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B172991ECB73490072CE70 /* Select.m */; };
+		F8B172A41ECB73490072CE70 /* SelectQueryTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B1729B1ECB73490072CE70 /* SelectQueryTransaction.m */; };
+		F8B172A51ECB73490072CE70 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B1729E1ECB73490072CE70 /* DBManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,23 +35,23 @@
 		F8B1725A1ECB31290072CE70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F8B1725D1ECB31290072CE70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F8B1725F1ECB31290072CE70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F8B172661ECB316E0072CE70 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBManager.h; path = ReflectionSqlDatabase/utils/DBManager.h; sourceTree = "<group>"; };
-		F8B172671ECB316E0072CE70 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBManager.m; path = ReflectionSqlDatabase/utils/DBManager.m; sourceTree = "<group>"; };
 		F8B1726E1ECB32310072CE70 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		F8B172701ECB33830072CE70 /* DaoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DaoModel.h; path = ReflectionSqlDatabase/models/DaoModel.h; sourceTree = "<group>"; };
-		F8B172711ECB33830072CE70 /* DaoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DaoModel.m; path = ReflectionSqlDatabase/models/DaoModel.m; sourceTree = "<group>"; };
-		F8B172731ECB3BD50072CE70 /* PropertyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PropertyHelper.h; path = ReflectionSqlDatabase/helpers/PropertyHelper.h; sourceTree = "<group>"; };
-		F8B172741ECB3BD50072CE70 /* PropertyHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PropertyHelper.m; path = ReflectionSqlDatabase/helpers/PropertyHelper.m; sourceTree = "<group>"; };
 		F8B172761ECB434F0072CE70 /* TestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestModel.h; sourceTree = "<group>"; };
 		F8B172771ECB434F0072CE70 /* TestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModel.m; sourceTree = "<group>"; };
-		F8B172791ECB52D60072CE70 /* DateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DateHelper.h; path = ReflectionSqlDatabase/helpers/DateHelper.h; sourceTree = "<group>"; };
-		F8B1727A1ECB52D60072CE70 /* DateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DateHelper.m; path = ReflectionSqlDatabase/helpers/DateHelper.m; sourceTree = "<group>"; };
-		F8B1727C1ECB58090072CE70 /* Select.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Select.h; path = ReflectionSqlDatabase/queries/Select.h; sourceTree = "<group>"; };
-		F8B1727D1ECB58090072CE70 /* Select.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Select.m; path = ReflectionSqlDatabase/queries/Select.m; sourceTree = "<group>"; };
-		F8B1727F1ECB582C0072CE70 /* SelectQueryTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectQueryTransaction.h; path = ReflectionSqlDatabase/queries/SelectQueryTransaction.h; sourceTree = "<group>"; };
-		F8B172801ECB582C0072CE70 /* SelectQueryTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectQueryTransaction.m; path = ReflectionSqlDatabase/queries/SelectQueryTransaction.m; sourceTree = "<group>"; };
-		F8B172821ECB5B720072CE70 /* QueryHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QueryHelper.h; path = ReflectionSqlDatabase/helpers/QueryHelper.h; sourceTree = "<group>"; };
-		F8B172831ECB5B720072CE70 /* QueryHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QueryHelper.m; path = ReflectionSqlDatabase/helpers/QueryHelper.m; sourceTree = "<group>"; };
+		F8B1728E1ECB73490072CE70 /* DateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateHelper.h; sourceTree = "<group>"; };
+		F8B1728F1ECB73490072CE70 /* DateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateHelper.m; sourceTree = "<group>"; };
+		F8B172901ECB73490072CE70 /* PropertyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyHelper.h; sourceTree = "<group>"; };
+		F8B172911ECB73490072CE70 /* PropertyHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyHelper.m; sourceTree = "<group>"; };
+		F8B172921ECB73490072CE70 /* QueryHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryHelper.h; sourceTree = "<group>"; };
+		F8B172931ECB73490072CE70 /* QueryHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryHelper.m; sourceTree = "<group>"; };
+		F8B172951ECB73490072CE70 /* DaoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaoModel.h; sourceTree = "<group>"; };
+		F8B172961ECB73490072CE70 /* DaoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DaoModel.m; sourceTree = "<group>"; };
+		F8B172981ECB73490072CE70 /* Select.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Select.h; sourceTree = "<group>"; };
+		F8B172991ECB73490072CE70 /* Select.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Select.m; sourceTree = "<group>"; };
+		F8B1729A1ECB73490072CE70 /* SelectQueryTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectQueryTransaction.h; sourceTree = "<group>"; };
+		F8B1729B1ECB73490072CE70 /* SelectQueryTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectQueryTransaction.m; sourceTree = "<group>"; };
+		F8B1729D1ECB73490072CE70 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
+		F8B1729E1ECB73490072CE70 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,54 +113,12 @@
 		F8B172651ECB31440072CE70 /* DatabaseLib */ = {
 			isa = PBXGroup;
 			children = (
-				F8B1726C1ECB318B0072CE70 /* models */,
-				F8B1726B1ECB31820072CE70 /* queries */,
-				F8B1726A1ECB317B0072CE70 /* helpers */,
-				F8B172691ECB31730072CE70 /* utils */,
+				F8B1728D1ECB73490072CE70 /* helpers */,
+				F8B172941ECB73490072CE70 /* models */,
+				F8B172971ECB73490072CE70 /* queries */,
+				F8B1729C1ECB73490072CE70 /* utils */,
 			);
 			name = DatabaseLib;
-			sourceTree = "<group>";
-		};
-		F8B172691ECB31730072CE70 /* utils */ = {
-			isa = PBXGroup;
-			children = (
-				F8B172661ECB316E0072CE70 /* DBManager.h */,
-				F8B172671ECB316E0072CE70 /* DBManager.m */,
-			);
-			name = utils;
-			sourceTree = "<group>";
-		};
-		F8B1726A1ECB317B0072CE70 /* helpers */ = {
-			isa = PBXGroup;
-			children = (
-				F8B172731ECB3BD50072CE70 /* PropertyHelper.h */,
-				F8B172741ECB3BD50072CE70 /* PropertyHelper.m */,
-				F8B172791ECB52D60072CE70 /* DateHelper.h */,
-				F8B1727A1ECB52D60072CE70 /* DateHelper.m */,
-				F8B172821ECB5B720072CE70 /* QueryHelper.h */,
-				F8B172831ECB5B720072CE70 /* QueryHelper.m */,
-			);
-			name = helpers;
-			sourceTree = "<group>";
-		};
-		F8B1726B1ECB31820072CE70 /* queries */ = {
-			isa = PBXGroup;
-			children = (
-				F8B1727C1ECB58090072CE70 /* Select.h */,
-				F8B1727D1ECB58090072CE70 /* Select.m */,
-				F8B1727F1ECB582C0072CE70 /* SelectQueryTransaction.h */,
-				F8B172801ECB582C0072CE70 /* SelectQueryTransaction.m */,
-			);
-			name = queries;
-			sourceTree = "<group>";
-		};
-		F8B1726C1ECB318B0072CE70 /* models */ = {
-			isa = PBXGroup;
-			children = (
-				F8B172701ECB33830072CE70 /* DaoModel.h */,
-				F8B172711ECB33830072CE70 /* DaoModel.m */,
-			);
-			name = models;
 			sourceTree = "<group>";
 		};
 		F8B1726D1ECB32310072CE70 /* Frameworks */ = {
@@ -169,6 +127,52 @@
 				F8B1726E1ECB32310072CE70 /* libsqlite3.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F8B1728D1ECB73490072CE70 /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F8B1728E1ECB73490072CE70 /* DateHelper.h */,
+				F8B1728F1ECB73490072CE70 /* DateHelper.m */,
+				F8B172901ECB73490072CE70 /* PropertyHelper.h */,
+				F8B172911ECB73490072CE70 /* PropertyHelper.m */,
+				F8B172921ECB73490072CE70 /* QueryHelper.h */,
+				F8B172931ECB73490072CE70 /* QueryHelper.m */,
+			);
+			name = helpers;
+			path = Classes/helpers;
+			sourceTree = "<group>";
+		};
+		F8B172941ECB73490072CE70 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				F8B172951ECB73490072CE70 /* DaoModel.h */,
+				F8B172961ECB73490072CE70 /* DaoModel.m */,
+			);
+			name = models;
+			path = Classes/models;
+			sourceTree = "<group>";
+		};
+		F8B172971ECB73490072CE70 /* queries */ = {
+			isa = PBXGroup;
+			children = (
+				F8B172981ECB73490072CE70 /* Select.h */,
+				F8B172991ECB73490072CE70 /* Select.m */,
+				F8B1729A1ECB73490072CE70 /* SelectQueryTransaction.h */,
+				F8B1729B1ECB73490072CE70 /* SelectQueryTransaction.m */,
+			);
+			name = queries;
+			path = Classes/queries;
+			sourceTree = "<group>";
+		};
+		F8B1729C1ECB73490072CE70 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				F8B1729D1ECB73490072CE70 /* DBManager.h */,
+				F8B1729E1ECB73490072CE70 /* DBManager.m */,
+			);
+			name = utils;
+			path = Classes/utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,17 +246,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8B172751ECB3BD50072CE70 /* PropertyHelper.m in Sources */,
+				F8B172A01ECB73490072CE70 /* PropertyHelper.m in Sources */,
+				F8B172A11ECB73490072CE70 /* QueryHelper.m in Sources */,
+				F8B172A21ECB73490072CE70 /* DaoModel.m in Sources */,
 				F8B172561ECB31290072CE70 /* ViewController.m in Sources */,
-				F8B172841ECB5B720072CE70 /* QueryHelper.m in Sources */,
+				F8B1729F1ECB73490072CE70 /* DateHelper.m in Sources */,
 				F8B172531ECB31290072CE70 /* AppDelegate.m in Sources */,
-				F8B172721ECB33830072CE70 /* DaoModel.m in Sources */,
+				F8B172A31ECB73490072CE70 /* Select.m in Sources */,
+				F8B172A51ECB73490072CE70 /* DBManager.m in Sources */,
+				F8B172A41ECB73490072CE70 /* SelectQueryTransaction.m in Sources */,
 				F8B172501ECB31290072CE70 /* main.m in Sources */,
-				F8B1727B1ECB52D60072CE70 /* DateHelper.m in Sources */,
-				F8B1727E1ECB58090072CE70 /* Select.m in Sources */,
-				F8B172811ECB582C0072CE70 /* SelectQueryTransaction.m in Sources */,
 				F8B172781ECB434F0072CE70 /* TestModel.m in Sources */,
-				F8B172681ECB316E0072CE70 /* DBManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +413,7 @@
 				F8B172641ECB31290072CE70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
