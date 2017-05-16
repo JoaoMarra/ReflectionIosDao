@@ -30,7 +30,7 @@ SQLite library for Ios using reflection. The central ideia is to simplify the cr
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'Classes/*.{h,m}'
+  s.source_files = 'Classes/**/*.{h,m}'
   
   # s.resource_bundles = {
   #   '${POD_NAME}' => ['${POD_NAME}/Assets/*.png']
