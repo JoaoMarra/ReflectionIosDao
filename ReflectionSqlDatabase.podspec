@@ -21,11 +21,11 @@ Pod::Spec.new do |s|
 SQLite library for Ios using reflection. The central ideia is to simplify the creation of DAO classes, and no need for complex configurations.
                        DESC
 
-  s.homepage         = 'https://github.com/JoaoMarra/ReflectionAndroidDao'
+  s.homepage         = 'https://github.com/JoaoMarra/ReflectionIosDao'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   #s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'João Gabriel Silva Marra' => 'silvamarraster@gmail.com' }
-  s.source           = { :git => 'https://github.com/JoaoMarra/ReflectionAndroidDao.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/JoaoMarra/ReflectionIosDao.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
