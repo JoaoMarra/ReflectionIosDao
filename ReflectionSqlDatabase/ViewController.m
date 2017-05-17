@@ -7,11 +7,11 @@
 //
 
 #import "ViewController.h"
-#import "TestModel.h"
+#import "PersonModel.h"
 #import "DBManager.h"
 #import "Select.h"
 
-@interface ViewController ()
+@interface ViewController ()<DBManagerDelegate>
 
 @end
 
@@ -20,48 +20,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [DBManager dropTable:TestModel.class];
-    [DBManager createTable:TestModel.class];
-    
-    TestModel *model = [TestModel new];
-    model.string = @"VALUE";
-    model.intVal = 1;
-    model.floatVal = 1;
-    model.doubleVal = 1;
-    model.longVal = 1;
-    model.date = [NSDate new];
-    [model insertModel];
-    
-    model.string = @"VALUE2";
-    model.intVal = 2;
-    model.floatVal = 2;
-    model.doubleVal = 2;
-    model.longVal = 2;
-    [model insertModel];
-    
-    model.string = @"VALUE3";
-    model.intVal = 3;
-    model.floatVal = 3;
-    model.doubleVal = 3;
-    model.longVal = 3;
-    [model insertModel];
-    
-    NSArray<TestModel *> *array = [[[[[[Select from:TestModel.class]
-                                    where:@"string" value:@"VALUE%" comparation:LIKE]
-                                    where:@"intVal" value:[NSNumber numberWithInt:1] comparation:MORE_THAN]
-                                    orderBy:@"longVal" order:DESCENDING]
-                                    limit:1]
-                                    execute];
-    array = [[[Select from:TestModel.class]
-                                    where:@"string" value:@"VALUE" comparation:EQUAL]
-                                    execute];
+    [DBManager setDebugMode:YES];
+    [DBManager initDB:self];
     NSLog(@"END PROGRAM");
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - DBManagerDelegate methods
+
+-(int)dbSchemeVersion {
+    return 1;
+}
+
+-(NSArray<Class> *)dbDaoClasses {
+    return @[PersonModel.class];
+}
+
+-(void)dbPostCreationOrUpdate {
+    PersonModel *model = [PersonModel new];
+    model.rg = @"rg";
+    model.name = @"Pedro";
+    model.age = 16;
+    model.birth = [NSDate new];
+    [model insertModel];
+    
+    //NSArray<PersonModel *> *array = [Select from:PersonModel.class].execute;
+    //NSLog(@"ARRAY - %lu",(unsigned long)array.count);
 }
 
 

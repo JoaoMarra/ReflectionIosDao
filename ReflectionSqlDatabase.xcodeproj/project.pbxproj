@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F82DFCBE1ECC7D2C00C31782 /* DBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F82DFCBD1ECC7D2C00C31782 /* DBHelper.m */; };
 		F87CEC0E1ECB7E5200247CA4 /* WhereNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F87CEC0D1ECB7E5200247CA4 /* WhereNode.m */; };
 		F8B172501ECB31290072CE70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B1724F1ECB31290072CE70 /* main.m */; };
 		F8B172531ECB31290072CE70 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B172521ECB31290072CE70 /* AppDelegate.m */; };
@@ -15,7 +16,7 @@
 		F8B1725B1ECB31290072CE70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8B1725A1ECB31290072CE70 /* Assets.xcassets */; };
 		F8B1725E1ECB31290072CE70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8B1725C1ECB31290072CE70 /* LaunchScreen.storyboard */; };
 		F8B1726F1ECB32310072CE70 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B1726E1ECB32310072CE70 /* libsqlite3.tbd */; };
-		F8B172781ECB434F0072CE70 /* TestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B172771ECB434F0072CE70 /* TestModel.m */; };
+		F8B172781ECB434F0072CE70 /* PersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B172771ECB434F0072CE70 /* PersonModel.m */; };
 		F8B1729F1ECB73490072CE70 /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B1728F1ECB73490072CE70 /* DateHelper.m */; };
 		F8B172A01ECB73490072CE70 /* PropertyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B172911ECB73490072CE70 /* PropertyHelper.m */; };
 		F8B172A11ECB73490072CE70 /* QueryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B172931ECB73490072CE70 /* QueryHelper.m */; };
@@ -26,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F82DFCBC1ECC7D2C00C31782 /* DBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBHelper.h; sourceTree = "<group>"; };
+		F82DFCBD1ECC7D2C00C31782 /* DBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBHelper.m; sourceTree = "<group>"; };
 		F87CEC0C1ECB7E5200247CA4 /* WhereNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhereNode.h; sourceTree = "<group>"; };
 		F87CEC0D1ECB7E5200247CA4 /* WhereNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhereNode.m; sourceTree = "<group>"; };
 		F8B1724B1ECB31290072CE70 /* ReflectionSqlDatabase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReflectionSqlDatabase.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,8 +42,8 @@
 		F8B1725D1ECB31290072CE70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F8B1725F1ECB31290072CE70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8B1726E1ECB32310072CE70 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		F8B172761ECB434F0072CE70 /* TestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestModel.h; sourceTree = "<group>"; };
-		F8B172771ECB434F0072CE70 /* TestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModel.m; sourceTree = "<group>"; };
+		F8B172761ECB434F0072CE70 /* PersonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonModel.h; sourceTree = "<group>"; };
+		F8B172771ECB434F0072CE70 /* PersonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonModel.m; sourceTree = "<group>"; };
 		F8B1728E1ECB73490072CE70 /* DateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateHelper.h; sourceTree = "<group>"; };
 		F8B1728F1ECB73490072CE70 /* DateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateHelper.m; sourceTree = "<group>"; };
 		F8B172901ECB73490072CE70 /* PropertyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyHelper.h; sourceTree = "<group>"; };
@@ -99,8 +102,8 @@
 				F8B1725C1ECB31290072CE70 /* LaunchScreen.storyboard */,
 				F8B1725F1ECB31290072CE70 /* Info.plist */,
 				F8B1724E1ECB31290072CE70 /* Supporting Files */,
-				F8B172761ECB434F0072CE70 /* TestModel.h */,
-				F8B172771ECB434F0072CE70 /* TestModel.m */,
+				F8B172761ECB434F0072CE70 /* PersonModel.h */,
+				F8B172771ECB434F0072CE70 /* PersonModel.m */,
 			);
 			path = ReflectionSqlDatabase;
 			sourceTree = "<group>";
@@ -141,6 +144,8 @@
 				F8B172911ECB73490072CE70 /* PropertyHelper.m */,
 				F8B172921ECB73490072CE70 /* QueryHelper.h */,
 				F8B172931ECB73490072CE70 /* QueryHelper.m */,
+				F82DFCBC1ECC7D2C00C31782 /* DBHelper.h */,
+				F82DFCBD1ECC7D2C00C31782 /* DBHelper.m */,
 			);
 			name = helpers;
 			path = Classes/helpers;
@@ -258,11 +263,12 @@
 				F8B1729F1ECB73490072CE70 /* DateHelper.m in Sources */,
 				F8B172531ECB31290072CE70 /* AppDelegate.m in Sources */,
 				F8B172A31ECB73490072CE70 /* Select.m in Sources */,
+				F82DFCBE1ECC7D2C00C31782 /* DBHelper.m in Sources */,
 				F87CEC0E1ECB7E5200247CA4 /* WhereNode.m in Sources */,
 				F8B172A51ECB73490072CE70 /* DBManager.m in Sources */,
 				F8B172A41ECB73490072CE70 /* SelectQueryTransaction.m in Sources */,
 				F8B172501ECB31290072CE70 /* main.m in Sources */,
-				F8B172781ECB434F0072CE70 /* TestModel.m in Sources */,
+				F8B172781ECB434F0072CE70 /* PersonModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

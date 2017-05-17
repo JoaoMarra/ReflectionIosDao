@@ -16,7 +16,8 @@
 
 -(void)configureWithReflectionDictionary:(NSDictionary *)dictionary;
 
-+(NSString *)tableName:(Class )tableModel;
++(NSString *)tableName:(Class)tableModel;
++(NSDictionary *)tableDescription:(Class)tableModel;
 
 -(void)insertModel;
 -(void)updateModel;

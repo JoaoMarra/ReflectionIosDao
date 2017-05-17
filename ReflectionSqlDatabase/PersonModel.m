@@ -6,12 +6,12 @@
 //  Copyright © 2017 marraware. All rights reserved.
 //
 
-#import "TestModel.h"
+#import "PersonModel.h"
 
-@implementation TestModel
+@implementation PersonModel
 
 -(NSString *)primaryKeyName {
-    return @"string";
+    return @"rg";
 }
 
 @end

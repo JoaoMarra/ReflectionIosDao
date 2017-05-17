@@ -12,6 +12,7 @@
 #import <objc/runtime.h>
 #import "PropertyHelper.h"
 #import "DateHelper.h"
+#import "DBHelper.h"
 
 @interface DBManager()
 
@@ -24,9 +25,74 @@
 
 @property (nonatomic, strong) NSString *databasePath;
 
+@property(nonatomic) BOOL debug;
+
 @end
 
 @implementation DBManager
+
++(void)initDB:(id<DBManagerDelegate>)delegate {
+    int version = delegate.dbSchemeVersion;
+    
+    if(![DBManager checkSchemeVersion:version]) { //create new database
+        NSUserDefaults *tableDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"ReflectionSqlDatabase"];
+        NSMutableDictionary *tableDic = [[tableDefaults objectForKey:@"tables"] mutableCopy];
+        
+        if( !tableDic) {
+            tableDic = [NSMutableDictionary new];
+        }
+        NSMutableArray<NSString *> *defaultKeys = [[tableDic allKeys] mutableCopy];
+        
+        NSArray<Class> *classes = delegate.dbDaoClasses;
+        NSMutableDictionary *checkedTables = [NSMutableDictionary new];
+        NSString *tableName;
+        if(classes) {
+            for(Class cl in classes) {
+                tableName = [DaoModel tableName:cl];
+                
+                [checkedTables setObject:@"" forKey:tableName];
+                if([tableDic objectForKey:tableName]) {
+                    [DBManager updateTable:cl oldDescription:[tableDic objectForKey:tableName]];
+                    [tableDic setObject:[DaoModel tableDescription:cl] forKey:tableName];
+                } else {
+                    [DBManager createTable:cl];
+                    [tableDic setObject:[DaoModel tableDescription:cl] forKey:tableName];
+                }
+                [defaultKeys removeObject:tableName];
+            }
+            
+            //check tables do drop:
+            for(NSString *key in defaultKeys) {
+                if(!checkedTables[key]) {
+                    [DBManager dropTableName:key];
+                    [tableDefaults removeObjectForKey:tableName];
+                }
+            }
+            [tableDefaults setObject:tableDic forKey:@"tables"];
+            [tableDefaults synchronize];
+        }
+    }
+    
+    if([delegate respondsToSelector:@selector(dbPostCreationOrUpdate)]) {
+        [delegate dbPostCreationOrUpdate];
+    }
+    
+}
+
++(BOOL)checkSchemeVersion:(int)version {
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"ReflectionSqlDatabase"];
+    NSNumber *savedVersion = [defaults objectForKey:@"scheme_version"];
+    if(savedVersion) {
+        if([savedVersion intValue] >= version)
+            return YES;
+    }
+    
+    savedVersion = [NSNumber numberWithInt:version];
+    [defaults setObject:savedVersion forKey:@"scheme_version"];
+    [defaults synchronize];
+    
+    return NO;
+}
 
 +(instancetype)manager {
     static DBManager *manager = nil;
@@ -64,7 +130,7 @@
         
         // Check if any error occurred during copying and display it.
         if (error != nil) {
-            NSLog(@"%@", [error localizedDescription]);
+            DBLog(@"%@", [error localizedDescription]);
         }
     }
 }
@@ -101,7 +167,7 @@
 
 +(BOOL)runQuery:(const char*)query executable:(BOOL)executable {
     CFAbsoluteTime timeInSeconds = CFAbsoluteTimeGetCurrent();
-    NSLog(@"DB RUN QUERY: %s", query);
+    DBLog(@"DB RUN QUERY:\n%s", query);
     
     sqlite3 *sqlite3Database;
     DBManager *manager = DBManager.manager;
@@ -111,36 +177,43 @@
     BOOL result = NO;
     BOOL openDatabaseResult = sqlite3_open([manager.databasePath UTF8String], &sqlite3Database);
     if(openDatabaseResult == SQLITE_OK) {
-        sqlite3_stmt *compiledStatement;
-        BOOL prepareStatementResult = sqlite3_prepare_v2(sqlite3Database, query, -1, &compiledStatement, NULL);
-        if(prepareStatementResult == SQLITE_OK) {
-            if(executable) {
-                [manager executableQuery:compiledStatement database:sqlite3Database];
-                result = YES;
-            } else {
+        if(executable) {
+            result = [manager executableQuery:query database:sqlite3Database];
+        } else {
+            sqlite3_stmt *compiledStatement;
+            int prepareStatementResult = sqlite3_prepare_v2(sqlite3Database, query, -1, &compiledStatement, nil);
+            if(prepareStatementResult == SQLITE_OK) {
                 NSMutableArray *results = [manager nonExecutableQuery:compiledStatement];
                 [manager.arrResults addObjectsFromArray:results];
-                NSLog(@"DB QUERY SUCCESS");
+                DBLog(@"DB QUERY SUCCESS");
                 result = YES;
+                sqlite3_finalize(compiledStatement);
+            } else {
+                DBLog(@"DB QUERY FAILED");
             }
-            sqlite3_finalize(compiledStatement);
         }
         sqlite3_close(sqlite3Database);
+    } else {
+        DBLog(@"DB QUERY FAILED");
     }
-    NSLog(@"DB QUERY END: %f", CFAbsoluteTimeGetCurrent()-timeInSeconds);
+
+    DBLog(@"DB QUERY END: %f\n", CFAbsoluteTimeGetCurrent()-timeInSeconds);
     
     return result;
 }
 
--(void)executableQuery:(sqlite3_stmt *)compiledStatement database:(sqlite3 *)sqlite3Database {
-    int executeQueryResults = sqlite3_step(compiledStatement);
-    if (executeQueryResults == SQLITE_DONE) {
+-(BOOL)executableQuery:(const char*)query database:(sqlite3 *)sqlite3Database {
+    char *error;
+    int executeQueryResults = sqlite3_exec(sqlite3Database, query, nil, nil, &error);
+    if (executeQueryResults == SQLITE_OK) {
         self.affectedRows = sqlite3_changes(sqlite3Database);
         self.lastInsertedRowID = sqlite3_last_insert_rowid(sqlite3Database);
-        NSLog(@"DB QUERY SUCCESS");
+        DBLog(@"DB QUERY SUCCESS");
+        return YES;
     } else {
-        NSLog(@"DB Error: %s", sqlite3_errmsg(sqlite3Database));
+        DBLog(@"DB Error: %s", error);
     }
+    return NO;
 }
 
 -(NSMutableArray *)nonExecutableQuery:(sqlite3_stmt *)compiledStatement {
@@ -174,16 +247,45 @@
     return results;
 }
 
++(void)updateTable:(Class)modelClass oldDescription:(NSDictionary *)oldDescription {
+    
+    NSDictionary *description = [DaoModel tableDescription:modelClass];
+    NSMutableString *retainColumns = [NSMutableString new];
+    NSArray<NSString *> *keys = oldDescription.allKeys;
+    for(NSString *key in keys) {
+        if(description[key]) {
+            [retainColumns appendFormat:@"%@,",key];
+        }
+    }
+    if([retainColumns hasSuffix:@","])
+        [retainColumns replaceCharactersInRange:NSMakeRange(retainColumns.length-1, 1) withString:@""];
+    
+    NSString *tempName = [NSString stringWithFormat:@"%@_temp",[DaoModel tableName:modelClass]];
+    [DBManager createTableName:tempName class:modelClass];
+    
+    NSString *copyQuery = [NSString stringWithFormat:@"INSERT INTO %@ (%@)\nSELECT %@ from %@",tempName,retainColumns,retainColumns,[DaoModel tableName:modelClass]];
+    [DBManager runQueryForInt:copyQuery.UTF8String];
+    
+    [DBManager dropTable:modelClass];
+    [DBManager runQueryForInt:[NSString stringWithFormat:@"ALTER TABLE %@ RENAME TO %@",tempName, [DaoModel tableName:modelClass]].UTF8String];
+    
+}
+
 +(void)createTable:(Class)modelClass {
     
     if(![modelClass isSubclassOfClass:DaoModel.class]) {
-        NSLog(@"DB Error: NOT SUBCLASS OF DaoModel");
+        DBLog(@"DB Error: NOT SUBCLASS OF DaoModel");
         return;
     }
     
+    [DBManager createTableName:[DaoModel tableName:modelClass] class:modelClass];
+    
+}
+
++(void)createTableName:(NSString *)tableName class:(Class)modelClass {
     NSMutableString *query = [NSMutableString new];
     [query appendString:@"CREATE TABLE IF NOT EXISTS "];
-    [query appendString:[DaoModel tableName:modelClass]];
+    [query appendString:tableName];
     [query appendString:@"("];
     
     unsigned int propertyCount;
@@ -216,20 +318,32 @@
         [query replaceCharactersInRange:NSMakeRange(query.length-1, 1) withString:@")"];
     
     [DBManager runQuery:query.UTF8String executable:YES];
-    
 }
 
 +(void)dropTable:(Class)modelClass {
     if(![modelClass isSubclassOfClass:DaoModel.class]) {
-        NSLog(@"DB Error: NOT SUBCLASS OF DaoModel");
+        DBLog(@"DB Error: NOT SUBCLASS OF DaoModel");
         return;
     }
     
+    [DBManager dropTableName:[DaoModel tableName:modelClass]];
+}
+
++(void)dropTableName:(NSString *)tableName {
     NSMutableString *query = [NSMutableString new];
     [query appendString:@"DROP TABLE IF EXISTS "];
-    [query appendString:[DaoModel tableName:modelClass]];
+    [query appendString:tableName];
     
     [DBManager runQuery:query.UTF8String executable:YES];
+}
+
++(void)setDebugMode:(BOOL)debug {
+    [DBManager manager].debug = debug;
+}
+
++(BOOL)isDebugMode {
+    BOOL debug = [DBManager manager].debug;
+    return debug;
 }
 
 #pragma mark - Creating components
