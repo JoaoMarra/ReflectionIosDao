@@ -21,7 +21,7 @@
 
 @property (nonatomic, strong) NSMutableArray *arrResults;
 @property (nonatomic) int affectedRows;
-@property (nonatomic) long long lastInsertedRowID;
+@property (nonatomic) int lastInsertedRowID;
 
 @property (nonatomic, strong) NSString *databasePath;
 
@@ -71,10 +71,10 @@
             [tableDefaults setObject:tableDic forKey:@"tables"];
             [tableDefaults synchronize];
         }
-    }
-    
-    if([delegate respondsToSelector:@selector(dbPostCreationOrUpdate)]) {
-        [delegate dbPostCreationOrUpdate];
+        
+        if([delegate respondsToSelector:@selector(dbPostCreationOrUpdate)]) {
+            [delegate dbPostCreationOrUpdate];
+        }
     }
     
 }
@@ -151,11 +151,14 @@
     }
     return nil;
 }
-+(int)runQueryForInt:(const char*)query {
++(int*)runQueryForInt:(const char*)query {
     if([DBManager runQuery:query executable:YES]) {
-        return DBManager.manager.affectedRows;
+        int *retorno = malloc(sizeof(int)*2);
+        retorno[0] = DBManager.manager.lastInsertedRowID;
+        retorno[1] = DBManager.manager.affectedRows;
+        return retorno;
     }
-    return -1;
+    return nil;
 }
 
 +(void)runQueryForArray:(const char*)query async:(void (^)(NSArray *results))completion {
@@ -294,9 +297,14 @@
     objc_property_t property;
     NSString *typeString;
     NSString *compareSting;
+    BOOL keySet = NO;
+    const char*properyName;
+    DaoModel *model = [modelClass alloc];
+    NSString *keyName = model.primaryKeyName;
     for (NSUInteger i=0; i<propertyCount; i++) {
         property = properties[i];
         compareSting = @([PropertyHelper getPropertyType:property]);
+        properyName = property_getName(property);
         typeString = nil;
         if([@"i" isEqualToString:compareSting])
             typeString = @"int";
@@ -311,9 +319,19 @@
         else if([@"NSString" isEqualToString:compareSting])
             typeString = @"varchar(255)";
         
+        if(!keySet && [keyName isEqualToString:@(properyName)]) {
+            typeString = [typeString stringByAppendingString:@" primary key"];
+            keySet = YES;
+        }
+        
         if(typeString)
-            [query appendString:[NSString stringWithFormat:@"\n%s %@,",property_getName(property),typeString]];
+            [query appendString:[NSString stringWithFormat:@"\n%s %@,",properyName,typeString]];
     }
+    
+    if(!keySet) {
+        [query appendFormat:@"%@ INTEGER primary key autoincrement)",keyName];
+    }
+    
     if([query hasSuffix:@","])
         [query replaceCharactersInRange:NSMakeRange(query.length-1, 1) withString:@")"];
     

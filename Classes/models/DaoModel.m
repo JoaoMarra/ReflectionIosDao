@@ -119,12 +119,21 @@
         } else {
             [query appendString:@"NULL,"];
         }
-        
     }
+    
+    if([self.primaryKeyName isEqualToString:DEFAULT_PRIMARY_KEY]){
+        [query appendString:[NSString stringWithFormat:@"%@,",object]];
+    }
+    
     if([query hasSuffix:@","])
         [query replaceCharactersInRange:NSMakeRange(query.length-1, 1) withString:@")"];
     
-    [DBManager runQueryForInt:query.UTF8String];
+    int *retorno = [DBManager runQueryForInt:query.UTF8String];
+    if(retorno) {
+        if([self.primaryKeyName isEqualToString:DEFAULT_PRIMARY_KEY])
+            self.default_primary_key = [NSNumber numberWithInt:retorno[0]];
+        free(retorno);
+    }
 }
 
 -(void)updateModel {

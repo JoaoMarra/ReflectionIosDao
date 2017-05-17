@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F82DFCBE1ECC7D2C00C31782 /* DBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F82DFCBD1ECC7D2C00C31782 /* DBHelper.m */; };
+		F82DFCC11ECCBC6B00C31782 /* AddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F82DFCC01ECCBC6B00C31782 /* AddressModel.m */; };
 		F87CEC0E1ECB7E5200247CA4 /* WhereNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F87CEC0D1ECB7E5200247CA4 /* WhereNode.m */; };
 		F8B172501ECB31290072CE70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B1724F1ECB31290072CE70 /* main.m */; };
 		F8B172531ECB31290072CE70 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B172521ECB31290072CE70 /* AppDelegate.m */; };
@@ -29,6 +30,8 @@
 /* Begin PBXFileReference section */
 		F82DFCBC1ECC7D2C00C31782 /* DBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBHelper.h; sourceTree = "<group>"; };
 		F82DFCBD1ECC7D2C00C31782 /* DBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBHelper.m; sourceTree = "<group>"; };
+		F82DFCBF1ECCBC6B00C31782 /* AddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressModel.h; sourceTree = "<group>"; };
+		F82DFCC01ECCBC6B00C31782 /* AddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressModel.m; sourceTree = "<group>"; };
 		F87CEC0C1ECB7E5200247CA4 /* WhereNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhereNode.h; sourceTree = "<group>"; };
 		F87CEC0D1ECB7E5200247CA4 /* WhereNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhereNode.m; sourceTree = "<group>"; };
 		F8B1724B1ECB31290072CE70 /* ReflectionSqlDatabase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReflectionSqlDatabase.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,6 +107,8 @@
 				F8B1724E1ECB31290072CE70 /* Supporting Files */,
 				F8B172761ECB434F0072CE70 /* PersonModel.h */,
 				F8B172771ECB434F0072CE70 /* PersonModel.m */,
+				F82DFCBF1ECCBC6B00C31782 /* AddressModel.h */,
+				F82DFCC01ECCBC6B00C31782 /* AddressModel.m */,
 			);
 			path = ReflectionSqlDatabase;
 			sourceTree = "<group>";
@@ -260,6 +265,7 @@
 				F8B172A11ECB73490072CE70 /* QueryHelper.m in Sources */,
 				F8B172A21ECB73490072CE70 /* DaoModel.m in Sources */,
 				F8B172561ECB31290072CE70 /* ViewController.m in Sources */,
+				F82DFCC11ECCBC6B00C31782 /* AddressModel.m in Sources */,
 				F8B1729F1ECB73490072CE70 /* DateHelper.m in Sources */,
 				F8B172531ECB31290072CE70 /* AppDelegate.m in Sources */,
 				F8B172A31ECB73490072CE70 /* Select.m in Sources */,

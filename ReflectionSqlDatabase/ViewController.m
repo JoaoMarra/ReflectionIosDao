@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "PersonModel.h"
+#import "AddressModel.h"
 #import "DBManager.h"
 #import "Select.h"
 
@@ -33,7 +34,7 @@
 }
 
 -(NSArray<Class> *)dbDaoClasses {
-    return @[PersonModel.class];
+    return @[PersonModel.class, AddressModel.class];
 }
 
 -(void)dbPostCreationOrUpdate {
@@ -43,6 +44,10 @@
     model.age = 16;
     model.birth = [NSDate new];
     [model insertModel];
+    AddressModel *address = [AddressModel new];
+    address.rgPerson = @"rg";
+    address.stringAddress = @"rua 1, bairro 1, cidade 1 - 1";
+    [address insertModel];
     
     //NSArray<PersonModel *> *array = [Select from:PersonModel.class].execute;
     //NSLog(@"ARRAY - %lu",(unsigned long)array.count);
