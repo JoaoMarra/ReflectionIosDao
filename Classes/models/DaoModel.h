@@ -19,9 +19,9 @@
 +(NSString *)tableName:(Class)tableModel;
 +(NSDictionary *)tableDescription:(Class)tableModel;
 
--(void)insertModel;
--(void)updateModel;
--(void)deleteModel;
+-(BOOL)insertModel;
+-(BOOL)updateModel;
+-(BOOL)deleteModel;
 
 -(NSString *)primaryKeyName;
 -(id)primaryKeyValue;

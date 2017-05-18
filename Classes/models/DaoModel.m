@@ -95,7 +95,7 @@
     return (NSDictionary *)dictionary;
 }
 
--(void)insertModel {
+-(BOOL)insertModel {
     NSMutableString *base = [NSMutableString new];
     NSMutableString *data = [NSMutableString new];
     
@@ -147,15 +147,40 @@
         if([self.primaryKeyName isEqualToString:DEFAULT_PRIMARY_KEY])
             self.default_primary_key = [NSNumber numberWithInt:retorno[0]];
         free(retorno);
+        return YES;
     }
+    return NO;
 }
 
--(void)updateModel {
-    [self insertModel];
+-(BOOL)updateModel {
+    return [self insertModel];
 }
 
--(void)deleteModel {
+-(BOOL)deleteModel {
+    if(!self.primaryKeyValue)
+        return NO;
     
+    NSMutableString *query = [NSMutableString new];
+    [query appendString:@"DELETE FROM "];
+    [query appendString:[DaoModel tableName:self.class]];
+    [query appendString:@" WHERE "];
+    [query appendString:self.primaryKeyName];
+    [query appendString:@" = "];
+    id primary = [self valueForKey:self.primaryKeyName];
+    if([primary isKindOfClass:[NSString class]])
+        [query appendFormat:@"\"%@\"",primary];
+    else if([primary isKindOfClass:[NSDate class]])
+        [query appendFormat:@"\"%@\"",[DateHelper stringFromDate:primary]];
+    else
+        [query appendFormat:@"%@",primary];
+    
+    int *result = [DBManager runQueryForInt:query.UTF8String];
+    if(result) {
+        int count = result[1];
+        free((result));
+        return (count > 0);
+    }
+    return NO;
 }
 
 -(NSString *)primaryKeyName {

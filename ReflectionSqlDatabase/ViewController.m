@@ -31,6 +31,7 @@
     model.age = 16;
     model.birth = [NSDate new];
     [model insertModel];
+    [model deleteModel];
     AddressModel *address = [AddressModel new];
     address.rgPerson = @"rg";
     address.stringAddress = @"rua 1, bairro 1, cidade 1 - 1";
@@ -38,6 +39,7 @@
     address.rgPerson = @"rg";
     address.stringAddress = @"NOVO";
     [address updateModel];
+    [address deleteModel];
     
     NSLog(@"PERSON - %d",[DBManager rowCount:PersonModel.class]);
     NSLog(@"ADDRESS - %d",[DBManager rowCount:AddressModel.class]);
@@ -50,7 +52,7 @@
     int del = [Delete from:PersonModel.class].execute;
     NSLog(@"PERSON DELETE - %d - %d",del, [DBManager rowCount:PersonModel.class]);
     
-    del = [[Delete from:AddressModel.class] where:@"rgPerson" value:@"rg" comparation:NOT_EQUAL].execute;
+    del = [Delete from:AddressModel.class].execute;
     NSLog(@"ADDRESS DELETE - %d - %d",del, [DBManager rowCount:AddressModel.class]);
     
     NSLog(@"END PROGRAM");

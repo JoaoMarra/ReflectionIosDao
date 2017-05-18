@@ -170,7 +170,7 @@
 
 +(BOOL)runQuery:(const char*)query executable:(BOOL)executable {
     CFAbsoluteTime timeInSeconds = CFAbsoluteTimeGetCurrent();
-    DBLog(@"DB RUN QUERY:\n%s", query);
+    DBLog(@"DBReflection RUN QUERY:\n%s", query);
     
     sqlite3 *sqlite3Database;
     DBManager *manager = DBManager.manager;
@@ -188,19 +188,19 @@
             if(prepareStatementResult == SQLITE_OK) {
                 NSMutableArray *results = [manager nonExecutableQuery:compiledStatement];
                 [manager.arrResults addObjectsFromArray:results];
-                DBLog(@"DB QUERY SUCCESS");
+                DBLog(@"DBReflection QUERY SUCCESS");
                 result = YES;
                 sqlite3_finalize(compiledStatement);
             } else {
-                DBLog(@"DB QUERY FAILED");
+                DBLog(@"DBReflection QUERY FAILED");
             }
         }
         sqlite3_close(sqlite3Database);
     } else {
-        DBLog(@"DB QUERY FAILED");
+        DBLog(@"DBReflection QUERY FAILED");
     }
 
-    DBLog(@"DB QUERY END: %f\n", CFAbsoluteTimeGetCurrent()-timeInSeconds);
+    DBLog(@"DBReflection QUERY END: %f\n", CFAbsoluteTimeGetCurrent()-timeInSeconds);
     
     return result;
 }
@@ -211,10 +211,10 @@
     if (executeQueryResults == SQLITE_OK) {
         self.affectedRows = sqlite3_changes(sqlite3Database);
         self.lastInsertedRowID = sqlite3_last_insert_rowid(sqlite3Database);
-        DBLog(@"DB QUERY SUCCESS");
+        DBLog(@"DBReflection QUERY SUCCESS");
         return YES;
     } else {
-        DBLog(@"DB Error: %s", error);
+        DBLog(@"DBReflection Error: %s", error);
     }
     return NO;
 }
@@ -276,7 +276,7 @@
 +(void)createTable:(Class)modelClass {
     
     if(![modelClass isSubclassOfClass:DaoModel.class]) {
-        DBLog(@"DB Error: NOT SUBCLASS OF DaoModel");
+        DBLog(@"DBReflection Error: NOT SUBCLASS OF DaoModel");
         return;
     }
     
@@ -339,7 +339,7 @@
 
 +(void)dropTable:(Class)modelClass {
     if(![modelClass isSubclassOfClass:DaoModel.class]) {
-        DBLog(@"DB Error: NOT SUBCLASS OF DaoModel");
+        DBLog(@"DBReflection Error: NOT SUBCLASS OF DaoModel");
         return;
     }
     
