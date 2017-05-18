@@ -23,6 +23,28 @@
     
     [DBManager setDebugMode:YES];
     [DBManager initDB:self];
+    
+    PersonModel *model = [PersonModel new];
+    model.rg = @"rg";
+    model.name = @"Pedro";
+    model.age = 16;
+    model.birth = [NSDate new];
+    [model insertModel];
+    AddressModel *address = [AddressModel new];
+    address.rgPerson = @"rg";
+    address.stringAddress = @"rua 1, bairro 1, cidade 1 - 1";
+    [address insertModel];
+    address.stringAddress = @"NOVO";
+    [address updateModel];
+    
+    NSLog(@"PERSON - %d",[DBManager rowCount:PersonModel.class]);
+    NSLog(@"ADDRESS - %d",[DBManager rowCount:AddressModel.class]);
+    
+    NSArray<AddressModel *> *addresses = [[[[Select from:AddressModel.class]
+                                            where:@"rgPerson" value:@"rg" comparation:EQUAL]
+                                           orderBy:DEFAULT_PRIMARY_KEY order:DESCENDING]
+                                          limit:5].execute;
+    
     NSLog(@"END PROGRAM");
 }
 
@@ -38,19 +60,7 @@
 }
 
 -(void)dbPostCreationOrUpdate {
-    PersonModel *model = [PersonModel new];
-    model.rg = @"rg";
-    model.name = @"Pedro";
-    model.age = 16;
-    model.birth = [NSDate new];
-    [model insertModel];
-    AddressModel *address = [AddressModel new];
-    address.rgPerson = @"rg";
-    address.stringAddress = @"rua 1, bairro 1, cidade 1 - 1";
-    [address insertModel];
     
-    //NSArray<PersonModel *> *array = [Select from:PersonModel.class].execute;
-    //NSLog(@"ARRAY - %lu",(unsigned long)array.count);
 }
 
 

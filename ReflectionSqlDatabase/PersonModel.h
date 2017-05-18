@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DaoModel.h"
-#import "Address.h"
+#import "AddressModel.h"
 
 @interface PersonModel : DaoModel
 
@@ -18,6 +18,6 @@
 @property(nonatomic, strong) NSDate *birth;
 @property(nonatomic) double currency;
 
-@property(nonatomic, strong) NSArray<Address *> *addresses;
+@property(nonatomic, strong) NSArray<AddressModel *> *addresses;
 
 @end

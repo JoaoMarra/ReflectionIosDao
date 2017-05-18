@@ -164,7 +164,7 @@
 +(void)runQueryForArray:(const char*)query async:(void (^)(NSArray *results))completion {
     
 }
-+(void)runQueryForInt:(const char*)query async:(void (^)(int rowCount))completion {
++(void)runQueryForInt:(const char*)query async:(void (^)(int* result))completion {
     
 }
 
@@ -267,11 +267,10 @@
     [DBManager createTableName:tempName class:modelClass];
     
     NSString *copyQuery = [NSString stringWithFormat:@"INSERT INTO %@ (%@)\nSELECT %@ from %@",tempName,retainColumns,retainColumns,[DaoModel tableName:modelClass]];
-    [DBManager runQueryForInt:copyQuery.UTF8String];
+    [DBManager runQuery:copyQuery.UTF8String executable:YES];
     
     [DBManager dropTable:modelClass];
-    [DBManager runQueryForInt:[NSString stringWithFormat:@"ALTER TABLE %@ RENAME TO %@",tempName, [DaoModel tableName:modelClass]].UTF8String];
-    
+    [DBManager runQuery:[NSString stringWithFormat:@"ALTER TABLE %@ RENAME TO %@",tempName, [DaoModel tableName:modelClass]].UTF8String executable:YES];
 }
 
 +(void)createTable:(Class)modelClass {
@@ -353,6 +352,17 @@
     [query appendString:tableName];
     
     [DBManager runQuery:query.UTF8String executable:YES];
+}
+
++(int)rowCount:(Class)modelClass {
+    NSString *countQuery = [NSString stringWithFormat:@"select count(*) as count from %@",[DaoModel tableName:modelClass]];
+    
+    if([DBManager runQuery:countQuery.UTF8String executable:NO]) {
+        NSArray *results = [DBManager.manager.arrResults copy];
+        if(results.count > 0 && results[0][@"count"])
+            return [results[0][@"count"] intValue];
+    }
+    return 0;
 }
 
 +(void)setDebugMode:(BOOL)debug {

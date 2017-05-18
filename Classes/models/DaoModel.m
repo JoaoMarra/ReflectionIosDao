@@ -14,7 +14,6 @@
 
 @interface DaoModel()
 
-@property(nonatomic, strong) NSString *insertBase;
 @property(nonatomic, strong) id default_primary_key;
 
 @end
@@ -50,8 +49,10 @@
             else
                 [self setValue:value forKey:propertName];
         }
-        
-        
+    }
+    
+    if([self.primaryKeyName isEqualToString:DEFAULT_PRIMARY_KEY] && dictionary[DEFAULT_PRIMARY_KEY]){
+        self.default_primary_key = dictionary[DEFAULT_PRIMARY_KEY];
     }
 }
 
@@ -95,9 +96,17 @@
 }
 
 -(void)insertModel {
-    NSMutableString *query = [NSMutableString new];
-    [query appendString:self.insertBase];
-    [query appendString:@" ("];
+    NSMutableString *base = [NSMutableString new];
+    NSMutableString *data = [NSMutableString new];
+    
+    [base appendString:@"REPLACE INTO "];
+    [base appendString:[DaoModel tableName:self.class]];
+    [base appendString:@" ("];
+    [data appendString:@"("];
+    if([self.primaryKeyName isEqualToString:DEFAULT_PRIMARY_KEY] && self.default_primary_key){
+        [base appendString:[NSString stringWithFormat:@"%@,",DEFAULT_PRIMARY_KEY]];
+        [data appendString:[NSString stringWithFormat:@"%@,",self.default_primary_key]];
+    }
     
     unsigned int propertyCount;
     
@@ -107,26 +116,31 @@
     id object;
     for (NSUInteger i=0; i<propertyCount; i++) {
         property = properties[i];
+        
         compareSting = @([PropertyHelper getPropertyType:property]);
-        object = [self valueForKey:@(property_getName(property))];
-        if(object) {
-            if([@"NSDate" isEqualToString:compareSting])
-                [query appendString:[NSString stringWithFormat:@"\"%@\",",[DateHelper stringFromDate:object]]];
-            else if([@"NSString" isEqualToString:compareSting])
-                [query appendString:[NSString stringWithFormat:@"\"%@\",",object]];
-            else
-                [query appendString:[NSString stringWithFormat:@"%@,",object]];
-        } else {
-            [query appendString:@"NULL,"];
+        if([DaoModel isValidPropertyType:compareSting]) {
+            [base appendString:[NSString stringWithFormat:@"%s,",property_getName(property)]];
+            object = [self valueForKey:@(property_getName(property))];
+            if(object) {
+                if([@"NSDate" isEqualToString:compareSting])
+                    [data appendString:[NSString stringWithFormat:@"\"%@\",",[DateHelper stringFromDate:object]]];
+                else if([@"NSString" isEqualToString:compareSting])
+                    [data appendString:[NSString stringWithFormat:@"\"%@\",",object]];
+                else
+                    [data appendString:[NSString stringWithFormat:@"%@,",object]];
+            } else {
+                [data appendString:@"NULL,"];
+            }
         }
     }
+    if([base hasSuffix:@","])
+        [base replaceCharactersInRange:NSMakeRange(base.length-1, 1) withString:@")"];
+    [base appendString:@" VALUES\n"];
     
-    if([self.primaryKeyName isEqualToString:DEFAULT_PRIMARY_KEY]){
-        [query appendString:[NSString stringWithFormat:@"%@,",object]];
-    }
+    if([data hasSuffix:@","])
+        [data replaceCharactersInRange:NSMakeRange(data.length-1, 1) withString:@")"];
     
-    if([query hasSuffix:@","])
-        [query replaceCharactersInRange:NSMakeRange(query.length-1, 1) withString:@")"];
+    NSString *query = [NSString stringWithFormat:@"%@ %@",base,data];
     
     int *retorno = [DBManager runQueryForInt:query.UTF8String];
     if(retorno) {
@@ -137,37 +151,7 @@
 }
 
 -(void)updateModel {
-    NSMutableString *query = [NSMutableString new];
-    [query appendString:self.insertBase];
-    [query appendString:@" ("];
-    
-    unsigned int propertyCount;
-    
-    objc_property_t *properties = class_copyPropertyList(self.class, &propertyCount);
-    objc_property_t property;
-    NSString *compareSting;
-    id object;
-    for (NSUInteger i=0; i<propertyCount; i++) {
-        property = properties[i];
-        compareSting = @([PropertyHelper getPropertyType:property]);
-        object = [self valueForKey:@(property_getName(property))];
-        if(object) {
-            if([@"NSDate" isEqualToString:compareSting])
-                [query appendString:[NSString stringWithFormat:@"\"%@\",",[DateHelper stringFromDate:object]]];
-            else if([@"NSString" isEqualToString:compareSting])
-                [query appendString:[NSString stringWithFormat:@"\"%@\",",object]];
-            else
-                [query appendString:[NSString stringWithFormat:@"%@,",object]];
-        } else {
-            [query appendString:@"NULL,"];
-        }
-        
-    }
-    if([query hasSuffix:@","])
-        [query replaceCharactersInRange:NSMakeRange(query.length-1, 1) withString:@")"];
-    
-    [DBManager runQueryForInt:query.UTF8String];
-
+    [self insertModel];
 }
 
 -(void)deleteModel {
@@ -182,29 +166,21 @@
     return [self valueForKey:[self primaryKeyName]];
 }
 
-#pragma mark - Creating components
-
--(NSString *)insertBase {
-    if(!_insertBase) {
-        NSMutableString *base = [NSMutableString new];
-        [base appendString:@"REPLACE INTO "];
-        [base appendString:[DaoModel tableName:self.class]];
-        [base appendString:@" ("];
-        
-        unsigned int propertyCount;
-        
-        objc_property_t *properties = class_copyPropertyList(self.class, &propertyCount);
-        objc_property_t property;
-        for (NSUInteger i=0; i<propertyCount; i++) {
-            property = properties[i];
-            [base appendString:[NSString stringWithFormat:@"%s,",property_getName(property)]];
-        }
-        if([base hasSuffix:@","])
-            [base replaceCharactersInRange:NSMakeRange(base.length-1, 1) withString:@")"];
-        
-        [base appendString:@" VALUES\n"];
-        _insertBase = (NSString *)base;
-    }
-    return _insertBase;
++(BOOL)isValidPropertyType:(NSString *)propertyType {
+    if([@"i" isEqualToString:propertyType])
+        return YES;
+    else if([@"f" isEqualToString:propertyType])
+        return YES;
+    else if([@"d" isEqualToString:propertyType])
+        return YES;
+    else if([@"q" isEqualToString:propertyType])
+        return YES;
+    else if([@"NSDate" isEqualToString:propertyType])
+        return YES;
+    else if([@"NSString" isEqualToString:propertyType])
+        return YES;
+    
+    return NO;
 }
+
 @end

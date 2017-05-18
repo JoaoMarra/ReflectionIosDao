@@ -12,12 +12,12 @@
 @implementation DBHelper
 
 void DBLog(NSString *format, ...) {
-    //if([DBManager isDebugMode]) {
+    if([DBManager isDebugMode]) {
         va_list argumentList;
         va_start(argumentList, format);
         NSLogv(format, argumentList);
         va_end(argumentList);
-    //}
+    }
 }
 
 @end
