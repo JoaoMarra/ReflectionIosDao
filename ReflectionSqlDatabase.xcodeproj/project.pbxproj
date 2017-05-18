@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		F82DFCBE1ECC7D2C00C31782 /* DBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F82DFCBD1ECC7D2C00C31782 /* DBHelper.m */; };
 		F82DFCC11ECCBC6B00C31782 /* AddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F82DFCC01ECCBC6B00C31782 /* AddressModel.m */; };
+		F86C63B51ECDE9F3007B2EE3 /* Delete.m in Sources */ = {isa = PBXBuildFile; fileRef = F86C63B41ECDE9F3007B2EE3 /* Delete.m */; };
+		F86C63B81ECDEA0A007B2EE3 /* DeleteQueryTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = F86C63B71ECDEA0A007B2EE3 /* DeleteQueryTransaction.m */; };
+		F86C63BB1ECDEA44007B2EE3 /* WhereQueryTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = F86C63BA1ECDEA44007B2EE3 /* WhereQueryTransaction.m */; };
 		F87CEC0E1ECB7E5200247CA4 /* WhereNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F87CEC0D1ECB7E5200247CA4 /* WhereNode.m */; };
 		F8B172501ECB31290072CE70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B1724F1ECB31290072CE70 /* main.m */; };
 		F8B172531ECB31290072CE70 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B172521ECB31290072CE70 /* AppDelegate.m */; };
@@ -32,6 +35,12 @@
 		F82DFCBD1ECC7D2C00C31782 /* DBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBHelper.m; sourceTree = "<group>"; };
 		F82DFCBF1ECCBC6B00C31782 /* AddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressModel.h; sourceTree = "<group>"; };
 		F82DFCC01ECCBC6B00C31782 /* AddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressModel.m; sourceTree = "<group>"; };
+		F86C63B31ECDE9F3007B2EE3 /* Delete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delete.h; sourceTree = "<group>"; };
+		F86C63B41ECDE9F3007B2EE3 /* Delete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Delete.m; sourceTree = "<group>"; };
+		F86C63B61ECDEA0A007B2EE3 /* DeleteQueryTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteQueryTransaction.h; sourceTree = "<group>"; };
+		F86C63B71ECDEA0A007B2EE3 /* DeleteQueryTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteQueryTransaction.m; sourceTree = "<group>"; };
+		F86C63B91ECDEA44007B2EE3 /* WhereQueryTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhereQueryTransaction.h; sourceTree = "<group>"; };
+		F86C63BA1ECDEA44007B2EE3 /* WhereQueryTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhereQueryTransaction.m; sourceTree = "<group>"; };
 		F87CEC0C1ECB7E5200247CA4 /* WhereNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhereNode.h; sourceTree = "<group>"; };
 		F87CEC0D1ECB7E5200247CA4 /* WhereNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhereNode.m; sourceTree = "<group>"; };
 		F8B1724B1ECB31290072CE70 /* ReflectionSqlDatabase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReflectionSqlDatabase.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,6 +182,12 @@
 				F8B172991ECB73490072CE70 /* Select.m */,
 				F8B1729A1ECB73490072CE70 /* SelectQueryTransaction.h */,
 				F8B1729B1ECB73490072CE70 /* SelectQueryTransaction.m */,
+				F86C63B31ECDE9F3007B2EE3 /* Delete.h */,
+				F86C63B41ECDE9F3007B2EE3 /* Delete.m */,
+				F86C63B61ECDEA0A007B2EE3 /* DeleteQueryTransaction.h */,
+				F86C63B71ECDEA0A007B2EE3 /* DeleteQueryTransaction.m */,
+				F86C63B91ECDEA44007B2EE3 /* WhereQueryTransaction.h */,
+				F86C63BA1ECDEA44007B2EE3 /* WhereQueryTransaction.m */,
 			);
 			name = queries;
 			path = Classes/queries;
@@ -263,11 +278,14 @@
 			files = (
 				F8B172A01ECB73490072CE70 /* PropertyHelper.m in Sources */,
 				F8B172A11ECB73490072CE70 /* QueryHelper.m in Sources */,
+				F86C63B81ECDEA0A007B2EE3 /* DeleteQueryTransaction.m in Sources */,
 				F8B172A21ECB73490072CE70 /* DaoModel.m in Sources */,
 				F8B172561ECB31290072CE70 /* ViewController.m in Sources */,
 				F82DFCC11ECCBC6B00C31782 /* AddressModel.m in Sources */,
+				F86C63B51ECDE9F3007B2EE3 /* Delete.m in Sources */,
 				F8B1729F1ECB73490072CE70 /* DateHelper.m in Sources */,
 				F8B172531ECB31290072CE70 /* AppDelegate.m in Sources */,
+				F86C63BB1ECDEA44007B2EE3 /* WhereQueryTransaction.m in Sources */,
 				F8B172A31ECB73490072CE70 /* Select.m in Sources */,
 				F82DFCBE1ECC7D2C00C31782 /* DBHelper.m in Sources */,
 				F87CEC0E1ECB7E5200247CA4 /* WhereNode.m in Sources */,

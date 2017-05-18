@@ -13,10 +13,6 @@
 #import "WhereNode.h"
 
 @interface SelectQueryTransaction()
-
-@property(nonatomic) Class modelClass;
-
-@property(nonatomic, strong) NSMutableArray<WhereNode *>* whereNodes;
 @property(nonatomic, strong) NSMutableString *orderBy;
 @property(nonatomic) int limit;
 
@@ -25,16 +21,8 @@
 @implementation SelectQueryTransaction
 
 -(id)initWithClass:(Class)modelClass {
-    self = [self init];
-    self.modelClass = modelClass;
+    self = [super initWithClass:modelClass];
     self.limit = 0;
-    
-    return self;
-}
-
--(SelectQueryTransaction *) where:(NSString *)columnName value:(id)value comparation:(WHERE_COMPARATION)comparation {
-    
-    [self.whereNodes addObject:[[WhereNode alloc] initWithColumnName:columnName value:value comparation:comparation]];
     
     return self;
 }
@@ -61,17 +49,20 @@
 
 -(NSArray *)execute {
     
+    NSArray<WhereNode *>* whereNodes = self.getWhereNodes;
+    Class modelClass = self.getModelClass;
+    
     NSMutableString *query = [NSMutableString new];
     [query appendString:@"SELECT * FROM "];
-    [query appendString:[DaoModel tableName:self.modelClass]];
+    [query appendString:[DaoModel tableName:modelClass]];
     
-    if(self.whereNodes.count > 0) {
+    if(whereNodes.count > 0) {
         [query appendString:@"\nwhere"];
         WhereNode *node;
-        for(int i = 0; i < self.whereNodes.count; i++) {
-            node = self.whereNodes[i];
+        for(int i = 0; i < whereNodes.count; i++) {
+            node = whereNodes[i];
             [query appendString:node.stringValue];
-            if(i < self.whereNodes.count-1)
+            if(i < whereNodes.count-1)
                 [query appendString:@" AND\n"];
         }
     }
@@ -89,22 +80,13 @@
         NSMutableArray *models = [NSMutableArray new];
         
         for(NSDictionary *dictionary in data) {
-            [models addObject:(DaoModel *)[[self.modelClass alloc]initWithDBDictionary:dictionary]];
+            [models addObject:(DaoModel *)[[modelClass alloc]initWithDBDictionary:dictionary]];
         }
         
         return (NSArray *)models;
     }
     
     return nil;
-}
-
-#pragma mark - Creating components
-
--(NSMutableArray *)whereNodes {
-    if(!_whereNodes) {
-        _whereNodes = [NSMutableArray new];
-    }
-    return _whereNodes;
 }
 
 @end

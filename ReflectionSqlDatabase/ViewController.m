@@ -11,6 +11,7 @@
 #import "AddressModel.h"
 #import "DBManager.h"
 #import "Select.h"
+#import "Delete.h"
 
 @interface ViewController ()<DBManagerDelegate>
 
@@ -34,6 +35,7 @@
     address.rgPerson = @"rg";
     address.stringAddress = @"rua 1, bairro 1, cidade 1 - 1";
     [address insertModel];
+    address.rgPerson = @"rg";
     address.stringAddress = @"NOVO";
     [address updateModel];
     
@@ -44,6 +46,12 @@
                                             where:@"rgPerson" value:@"rg" comparation:EQUAL]
                                            orderBy:DEFAULT_PRIMARY_KEY order:DESCENDING]
                                           limit:5].execute;
+    
+    int del = [Delete from:PersonModel.class].execute;
+    NSLog(@"PERSON DELETE - %d - %d",del, [DBManager rowCount:PersonModel.class]);
+    
+    del = [[Delete from:AddressModel.class] where:@"rgPerson" value:@"rg" comparation:NOT_EQUAL].execute;
+    NSLog(@"ADDRESS DELETE - %d - %d",del, [DBManager rowCount:AddressModel.class]);
     
     NSLog(@"END PROGRAM");
 }

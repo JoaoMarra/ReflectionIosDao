@@ -15,8 +15,8 @@
     switch(comparation) {
         case EQUAL:
             return @"=";
-        case NOTEQUAL:
-            return @"!=";
+        case NOT_EQUAL:
+            return @"<>";
         case LIKE:
             return @"like";
         case NOT_LIKE:

@@ -7,13 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WhereQueryTransaction.h"
 #import "QueryHelper.h"
 
-@interface SelectQueryTransaction<ObjectType> : NSObject
-
--(id)initWithClass:(Class)modelClass;
-
--(SelectQueryTransaction<ObjectType> *) where:(NSString *)columnName value:(id)value comparation:(WHERE_COMPARATION)comparation;
+@interface SelectQueryTransaction<ObjectType> : WhereQueryTransaction<ObjectType>
 
 -(SelectQueryTransaction<ObjectType> *) orderBy:(NSString *)columnName order:(ORDER_BY)order;
 
