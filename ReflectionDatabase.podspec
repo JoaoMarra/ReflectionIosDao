@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-    SQLite library for iOS using reflection
+    SQLite library for iOS using reflection written on Objective C. The central ideia is to simplify the creation of DAO classes, and no need for complex configurations
                        DESC
 
   s.homepage         = 'https://github.com/JoaoMarra/ReflectionIosDao'
@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'ReflectionIosDao/Classes/**/*'
+  s.source_files = 'ReflectionDatabase/Classes/**/*'
   
   # s.resource_bundles = {
   #   'ReflectionIosDao' => ['ReflectionIosDao/Assets/*.png']
