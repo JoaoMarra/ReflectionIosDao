@@ -1,0 +1,16 @@
+PODS:
+  - ReflectionDatabase (1.0)
+
+DEPENDENCIES:
+  - ReflectionDatabase (from `../`)
+
+EXTERNAL SOURCES:
+  ReflectionDatabase:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ReflectionDatabase: f8ce6245b7835d99f10bdf617b398b079f096e30
+
+PODFILE CHECKSUM: b16fb53a19d6167e1225a05761b836eaf78f13af
+
+COCOAPODS: 1.5.2

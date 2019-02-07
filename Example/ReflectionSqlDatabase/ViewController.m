@@ -46,8 +46,8 @@
     
     NSArray<AddressModel *> *addresses = [[[[Select from:AddressModel.class]
                                             where:@"rgPerson" value:@"rg" comparation:EQUAL]
-                                           orderBy:DEFAULT_PRIMARY_KEY order:DESCENDING]
-                                          limit:5].execute;
+                                            orderBy:DEFAULT_PRIMARY_KEY order:DESCENDING]
+                                            limit:5].execute;
     
     int del = [Delete from:PersonModel.class].execute;
     NSLog(@"PERSON DELETE - %d - %d",del, [DBManager rowCount:PersonModel.class]);
