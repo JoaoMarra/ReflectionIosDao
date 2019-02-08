@@ -1,5 +1,14 @@
-# ReflectionDao
+# ReflectionDatabase
 SQLite library for iOS using reflection written on Objective C. The central ideia is to simplify the creation of DAO classes, and **no need for complex configurations**.
+
+# Installation
+
+ReflectionDatabase is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+pod 'ReflectionDatabase'
+```
 
 # How to use
 
