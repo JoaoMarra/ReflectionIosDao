@@ -326,7 +326,6 @@
 		};
 		F8B172631ECB31290072CE70 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 999ABD0A71057B59662EB352 /* Pods-ReflectionSqlDatabase.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ReflectionSqlDatabase/Info.plist;
@@ -338,7 +337,6 @@
 		};
 		F8B172641ECB31290072CE70 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA27942C2908AF5F5886BEF1 /* Pods-ReflectionSqlDatabase.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ReflectionSqlDatabase/Info.plist;

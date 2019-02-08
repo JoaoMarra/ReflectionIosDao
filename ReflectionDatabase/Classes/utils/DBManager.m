@@ -210,7 +210,7 @@
     int executeQueryResults = sqlite3_exec(sqlite3Database, query, nil, nil, &error);
     if (executeQueryResults == SQLITE_OK) {
         self.affectedRows = sqlite3_changes(sqlite3Database);
-        self.lastInsertedRowID = sqlite3_last_insert_rowid(sqlite3Database);
+        self.lastInsertedRowID = (int)sqlite3_last_insert_rowid(sqlite3Database);
         DBLog(@"DBReflection QUERY SUCCESS");
         return YES;
     } else {
